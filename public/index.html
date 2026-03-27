@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아이디어스 글로벌 작가 대시보드</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E8510A;
+    --primary-light: #F06030;
+    --primary-pale: #FEF1EC;
+    --dark: #1A1A2E;
+    --gray-dark: #3D3D3D;
+    --gray-mid: #7A7A8C;
+    --gray-light: #C4C4D0;
+    --gray-pale: #F5F5FA;
+    --white: #FFFFFF;
+    --success: #34C770;
+    --success-pale: #E8F9EF;
+    --warning: #F5A623;
+    --warning-pale: #FEF5E7;
+    --danger: #E8445A;
+    --danger-pale: #FDECEF;
+    --border: #E8E8F0;
+    --shadow: 0 4px 24px rgba(26,26,46,0.08);
+    --shadow-lg: 0 8px 48px rgba(26,26,46,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--gray-pale);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--primary);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.5px;
+  }
+
+  .logo-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    letter-spacing: -0.3px;
+  }
+
+  .logo-text span {
+    color: var(--primary);
+  }
+
+/* MAIN */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .page-hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .page-hero .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary-pale);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    letter-spacing: 0.2px;
+  }
+
+  .page-hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.3;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+
+  .page-hero p {
+    font-size: 15px;
+    color: var(--gray-mid);
+    line-height: 1.6;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title .step-dot {
+    width: 24px;
+    height: 24px;
+    background: var(--primary);
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-subtitle {
+    font-size: 13px;
+    color: var(--gray-mid);
+    margin-bottom: 20px;
+    padding-left: 32px;
+  }
+
+  /* INPUT GROUP */
+  .input-group {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .input-wrap {
+    flex: 1;
+    position: relative;
+  }
+
+  .input-wrap input {
+    width: 100%;
+    height: 48px;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.15s;
+    background: var(--gray-pale);
+  }
+
+  .input-wrap input:focus {
+    border-color: var(--primary);
+    background: var(--white);
+  }
+
+  .input-wrap input::placeholder { color: var(--gray-light); }
+
+  .btn-primary {
+    height: 48px;
+    padding: 0 24px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-primary:hover { background: var(--primary-light); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled { background: var(--gray-light); cursor: not-allowed; transform: none; }
+
+  .btn-secondary {
+    height: 40px;
+    padding: 0 18px;
+    background: var(--gray-pale);
+    color: var(--dark);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+
+  /* MANUAL FORM */
+  .manual-form {
+    display: none;
+    margin-top: 16px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border);
+    animation: fadeIn 0.2s ease;
+  }
+
+  .manual-form.open { display: block; }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .form-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-dark);
+    margin-bottom: 6px;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.15s;
+    background: var(--gray-pale);
+  }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--primary);
+    background: var(--white);
+  }
+
+  .form-field textarea { resize: vertical; min-height: 80px; }
+  .form-field.full { grid-column: 1 / -1; }
+
+  /* DIVIDER */
+  .or-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 14px 0;
+    color: var(--gray-light);
+    font-size: 12px;
+  }
+
+  .or-divider::before, .or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* LOADING */
+  .loading-state {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .loading-state.show { display: block; }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 0 auto 16px;
+  }
+
+  .loading-text {
+    font-size: 14px;
+    color: var(--gray-mid);
+  }
+
+  /* RESULT SECTION */
+  #result-section { display: none; }
+  #result-section.show { display: block; animation: fadeIn 0.3s ease; }
+
+  /* VERDICT BANNER */
+  .verdict-banner {
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .verdict-banner.possible { background: var(--success-pale); border: 1.5px solid #A8E8C6; }
+  .verdict-banner.partial { background: var(--warning-pale); border: 1.5px solid #F5D58A; }
+  .verdict-banner.impossible { background: var(--danger-pale); border: 1.5px solid #F5B5BE; }
+
+  .verdict-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .possible .verdict-icon { background: #C8F2DC; }
+  .partial .verdict-icon { background: #FCE9B0; }
+  .impossible .verdict-icon { background: #FACDD4; }
+
+  .verdict-text h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .possible .verdict-text h3 { color: #1A9252; }
+  .partial .verdict-text h3 { color: #C07000; }
+  .impossible .verdict-text h3 { color: #C0293C; }
+
+  .verdict-text p { font-size: 13px; color: var(--gray-dark); line-height: 1.55; }
+
+  /* PRODUCT INFO BOX */
+  .product-info-box {
+    background: var(--gray-pale);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .product-thumb {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    background: var(--border);
+    object-fit: cover;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+
+  .product-meta h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 3px;
+  }
+
+  .product-meta p {
+    font-size: 12px;
+    color: var(--gray-mid);
+  }
+
+  .product-tag {
+    margin-left: auto;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-dark);
+  }
+
+  /* REASON CARD */
+  .reason-section {
+    margin-bottom: 20px;
+  }
+
+  .section-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .reason-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--gray-dark);
+  }
+
+  .reason-box ul { padding-left: 18px; }
+  .reason-box ul li { margin-bottom: 6px; }
+
+  /* COUNTRY MAP */
+  .countries-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .country-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .country-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 12px rgba(255,92,53,0.1);
+    transform: translateY(-1px);
+  }
+
+  .country-card .flag {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .country-card .c-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+
+  .country-card .c-badge {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+
+  .c-badge.high { background: #E8F9EF; color: #1A9252; }
+  .c-badge.mid { background: #FFF0ED; color: var(--primary); }
+  .c-badge.low { background: var(--gray-pale); color: var(--gray-mid); }
+
+  .country-card .c-reason {
+    font-size: 11px;
+    color: var(--gray-mid);
+    margin-top: 5px;
+    line-height: 1.45;
+  }
+
+  /* COUNTRY DETAIL MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,46,0.4);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-overlay.show { display: flex; }
+
+  .modal-box {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px;
+    width: 480px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.2s ease;
+  }
+
+  .modal-close {
+    float: right;
+    background: var(--gray-pale);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--gray-mid);
+  }
+
+  /* TABS */
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    background: var(--gray-pale);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 20px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: var(--gray-mid);
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .tab-btn.active {
+    background: var(--white);
+    color: var(--primary);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+
+  /* REGION FILTER */
+  .region-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .region-chip {
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    color: var(--gray-mid);
+    transition: all 0.15s;
+  }
+
+  .region-chip.active, .region-chip:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-pale);
+  }
+
+  /* TOP PICKS highlight */
+  .top-picks-label {
+    background: var(--primary);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-left: 8px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* NOTICE BOX */
+  .notice-box {
+    background: var(--primary-pale);
+    border: 1px solid #FFD5C8;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #B83F24;
+    line-height: 1.6;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+
+  /* FOOTER */
+  .dash-footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: var(--gray-light);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    header { padding: 0 16px; }
+    main { padding: 24px 14px 60px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .countries-grid { grid-template-columns: repeat(2, 1fr); }
+    .input-group { flex-direction: column; }
+    .page-hero h1 { font-size: 22px; }
+  }  .key-save-btn {
+    height: 34px;
+    padding: 0 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .key-save-btn:hover { background: var(--primary-light); }
+  .key-status {
+    font-size: 11px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .key-status.ok { color: #34C770; }
+  .key-status.none { color: rgba(255,255,255,0.3); }
+
+
+  .country-card.impossible-card {
+    cursor: default;
+    border-color: #F5B5BE;
+    background: var(--white);
+  }
+  .country-card.impossible-card:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: #F5B5BE;
+  }
+  .c-badge.impossible-badge {
+    background: var(--danger-pale);
+    color: var(--danger);
+  }
+  .c-badge.unanalyzed {
+    background: var(--gray-pale);
+    color: var(--primary);
+    border: 1px dashed var(--primary);
+  }
+  .country-card.analyze-card:hover {
+    border-color: var(--primary);
+    background: var(--primary-pale);
+  }
+
+
+  .c-badge.possible-badge {
+    background: var(--success-pale);
+    color: #1A9252;
+    font-weight: 700;
+  }
+  .country-card.analyzed-card {
+    border-color: #A8E8C6;
+  }
+  .country-card.analyzed-card:hover {
+    border-color: var(--success);
+    box-shadow: 0 2px 12px rgba(52,199,112,0.15);
+  }
+
+
+  
+  /* 국가 카드 헤더 */
+  .cc-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .cc-flag {
+    font-size: 28px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .cc-ok-badge {
+    color: #1A9252;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .cc-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .cc-reason-imp { color: var(--danger) !important; }
+  .country-card .flag { display: block; }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-mark">idus</div>
+    <span class="logo-text"><span>글로벌</span> 판매 적합성 검사</span>
+  </div>
+  
+</header>
+
+  
+  
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="badge">🌍 <span data-ko="45개국 글로벌 판매">45개국 글로벌 판매</span></div>
+    <h1 data-ko="내 작품, 글로벌에서 팔 수 있을까요?">내 작품, 글로벌에서 팔 수 있을까요?</h1>
+    <p data-ko="작품 정보를 입력해 글로벌 판매 가능 여부를 즉시 확인하세요">작품 정보를 입력해 글로벌 판매 가능 여부를 즉시 확인하세요</p>
+  </div>
+
+  <!-- 입력 카드 -->
+  <div class="card">
+    <div class="card-title">
+      <div class="step-dot">1</div>
+      <span>작품 정보 입력</span>
+    </div>
+    <div class="card-subtitle">URL을 입력하면 작품 정보를 자동으로 가져와요</div>
+
+    <!-- URL 입력 -->
+    <div style="margin-bottom:16px;">
+      <div class="input-group">
+        <div class="input-wrap">
+          <input type="url" id="urlInput" placeholder="https://www.idus.com/w/product/...">
+        </div>
+        <button class="btn-primary" onclick="fetchFromUrl()">
+          <span>🔍</span> 분석하기
+        </button>
+      </div>
+      <div id="urlStatus" style="font-size:12px;margin-top:6px;"></div>
+    </div>
+
+    <div class="or-divider"><span>또는 직접 입력</span></div>
+    <div style="text-align:center;">
+      <button class="btn-secondary" onclick="toggleManual()">✏️ 작품 정보 직접 입력하기</button>
+    </div>
+
+    <!-- 직접 입력 폼 -->
+    <div class="manual-form" id="manualForm">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>작품명 *</label>
+          <input type="text" id="m_name" placeholder="ex. 핸드메이드 도자기 컵">
+        </div>
+        <div class="form-field">
+          <label>카테고리 *</label>
+          <select id="m_cat">
+            <option value="">-- 선택 --</option>
+            <optgroup label="공예">
+              <option value="공예_생활용품">공예 > 생활용품</option>
+              <option value="공예_주방용품">공예 > 주방용품</option>
+              <option value="공예_홈리빙">공예 > 홈리빙</option>
+            </optgroup>
+            <optgroup label="농축수산물">
+              <option value="농축수산물_농산물">농산물</option>
+              <option value="농축수산물_수산물">수산물</option>
+              <option value="농축수산물_축산물">축산물</option>
+            </optgroup>
+            <optgroup label="디지털 콘텐츠">
+              <option value="디지털콘텐츠_굿노트">굿노트</option>
+              <option value="디지털콘텐츠_디지털리소스">디지털리소스</option>
+              <option value="디지털콘텐츠_영상">영상</option>
+              <option value="디지털콘텐츠_음원">음원</option>
+            </optgroup>
+            <optgroup label="디지털/폰 케이스">
+              <option value="디지털_거치대홀더">거치대/홀더</option>
+              <option value="디지털_폰케이스">폰케이스</option>
+              <option value="디지털_태블릿케이스">태블릿/노트북케이스</option>
+              <option value="디지털_보조배터리">보조배터리/충전용품</option>
+              <option value="디지털_워치스트랩">워치스트랩</option>
+            </optgroup>
+            <optgroup label="문구/팬시">
+              <option value="문구_다이어리">다이어리/플래너</option>
+              <option value="문구_스티커">스티커</option>
+              <option value="문구_카드편지지">카드/편지지</option>
+              <option value="문구_노트">노트/수첩</option>
+              <option value="문구_기타">기타 문구용품</option>
+            </optgroup>
+            <optgroup label="반려동물">
+              <option value="반려동물_의류">반려동물의류</option>
+              <option value="반려동물_액세서리">반려동물액세서리</option>
+              <option value="반려동물_가구">반려동물가구</option>
+              <option value="반려동물_사료간식">사료/간식</option>
+            </optgroup>
+            <optgroup label="뷰티">
+              <option value="뷰티_스킨케어">스킨케어</option>
+              <option value="뷰티_메이크업">메이크업</option>
+              <option value="뷰티_향수">향수</option>
+              <option value="뷰티_헤어케어">헤어케어</option>
+              <option value="뷰티_비누클렌징">비누/클렌징</option>
+            </optgroup>
+            <optgroup label="생활용품">
+              <option value="생활용품_건강케어">건강/셀프케어용품</option>
+              <option value="생활용품_캔들디퓨저">캔들/디퓨저/방향제</option>
+              <option value="생활용품_세제">세제/홈케어용품</option>
+            </optgroup>
+            <optgroup label="식품">
+              <option value="식품_가공식품">가공식품</option>
+              <option value="식품_과자베이커리">과자/베이커리</option>
+              <option value="식품_전통주">전통주</option>
+            </optgroup>
+            <optgroup label="액세서리">
+              <option value="액세서리_귀걸이">귀걸이</option>
+              <option value="액세서리_목걸이">목걸이</option>
+              <option value="액세서리_반지">반지</option>
+              <option value="액세서리_팔찌">팔찌</option>
+            </optgroup>
+            <optgroup label="의류">
+              <option value="의류_상의">상의</option>
+              <option value="의류_원피스">원피스</option>
+              <option value="의류_생활한복">생활한복</option>
+            </optgroup>
+            <optgroup label="패션잡화">
+              <option value="패션잡화_가방">가방/파우치</option>
+              <option value="패션잡화_시계">시계</option>
+              <option value="패션잡화_모자">모자</option>
+              <option value="패션잡화_키링">키링/백참</option>
+              <option value="패션잡화_양말">양말/스타킹</option>
+            </optgroup>
+            <optgroup label="홈리빙">
+              <option value="홈리빙_가구">가구</option>
+              <option value="홈리빙_패브릭">패브릭</option>
+              <option value="홈리빙_홈데코">홈데코</option>
+              <option value="홈리빙_꽃식물">꽃/식물</option>
+            </optgroup>
+            <optgroup label="주방용품">
+              <option value="주방_식기">식기</option>
+              <option value="주방_컵텀블러">컵/잔/텀블러</option>
+              <option value="주방_조리도구">조리도구</option>
+            </optgroup>
+            <optgroup label="취미/레저">
+              <option value="취미_DIY키트">DIY키트</option>
+              <option value="취미_그림">그림</option>
+              <option value="취미_악기">악기</option>
+            </optgroup>
+            <optgroup label="영유아동용품">
+              <option value="영유아_의류">영유아동의류</option>
+              <option value="영유아_장난감">영유아동장난감</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="form-field full">
+          <label>작품 설명 (선택)</label>
+          <textarea id="m_desc" placeholder="작품에 대한 간략한 설명을 입력하세요..."></textarea>
+        </div>
+        <div class="form-field">
+          <label>소재 / 재료 (선택)</label>
+          <input type="text" id="m_material" placeholder="ex. 도자기, 천연가죽, 순은 925">
+        </div>
+        <div class="form-field">
+          <label>가격대 (선택)</label>
+          <input type="text" id="m_price" placeholder="ex. 25,000원">
+        </div>
+      </div>
+      <button class="btn-primary" style="width:100%;" onclick="analyzeFromManual()">
+        <span>🔍</span> <span>판매 가능 여부 확인하기</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading-state" id="loadingState">
+    <div class="spinner"></div>
+    <p class="loading-text" id="loadingMsg">작품 정보를 분석하는 중...</p>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result-section" style="display:none;">
+
+    <!-- VERDICT -->
+    <div id="verdictBanner" class="verdict-banner possible">
+      <div class="verdict-icon" id="verdictIcon">✅</div>
+      <div class="verdict-text">
+        <h3 id="verdictTitle">글로벌 판매 가능</h3>
+        <p id="verdictDesc"></p>
+      </div>
+    </div>
+
+    <!-- PRODUCT INFO -->
+    <div class="product-info-box" id="productInfoBox">
+      <div class="product-thumb" id="productThumb">📦</div>
+      <div class="product-meta">
+        <h4 id="productName">작품명</h4>
+        <p id="productCategory">카테고리</p>
+      </div>
+      <span class="product-tag" id="productTag">분석완료</span>
+    </div>
+
+    <!-- REASON -->
+    <div id="tab-reason-content" style="display:block">
+      <div id="reasonContent" style="display:none;"></div>
+      <div id="noticeBoxWrap"></div>
+    </div>
+
+    <!-- COUNTRIES -->
+    <div id="tab-countries-content" style="display:none;">
+      <div style="margin-bottom:14px;">
+        <div class="section-label"><span>지역 필터</span></div>
+        <div class="region-tabs" id="regionTabs">
+          <span class="region-chip active" onclick="filterRegion('all', this)">🌐 전체 (45개국)</span>
+          <span class="region-chip" onclick="filterRegion('jp', this)"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f1ef-1f1f5.svg" style="width:14px;height:14px;vertical-align:middle;margin-right:3px;">일본</span>
+          <span class="region-chip" onclick="filterRegion('asia', this)">🌏 아시아/오세아니아</span>
+          <span class="region-chip" onclick="filterRegion('europe', this)">🌍 유럽</span>
+          <span class="region-chip" onclick="filterRegion('americas', this)">🌎 아메리카</span>
+          <span class="region-chip" onclick="filterRegion('mideast', this)">🌍 중동/아프리카</span>
+        </div>
+      </div>
+      <div class="countries-grid" id="countriesGrid"></div>
+    </div>
+
+  </div>
+
+</main>
+
+<div class="dash-footer">
+  © 2024 idus Global · 최신 업데이트: 2024.11.15 · 문의: <a href="https://idus.channel.io" style="color:var(--primary);">idus.channel.io</a>
+</div>
+
+<!-- COUNTRY DETAIL MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalDirect()">✕ 닫기</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+
+const COUNTRIES = [
+  // 아시아
+  { code: "JP", flag: "🇯🇵", name: "일본",           region: "jp"       },
+  { code: "SG", flag: "🇸🇬", name: "싱가포르",        region: "asia"     },
+  { code: "HK", flag: "🇭🇰", name: "홍콩",            region: "asia"     },
+  { code: "TW", flag: "🇹🇼", name: "대만",            region: "asia"     },
+  { code: "ID", flag: "🇮🇩", name: "인도네시아",      region: "asia"     },
+  { code: "MY", flag: "🇲🇾", name: "말레이시아",      region: "asia"     },
+  { code: "TH", flag: "🇹🇭", name: "태국",            region: "asia"     },
+  { code: "VN", flag: "🇻🇳", name: "베트남",          region: "asia"     },
+  { code: "BD", flag: "🇧🇩", name: "방글라데시",      region: "asia"     },
+  { code: "BT", flag: "🇧🇹", name: "부탄",            region: "asia"     },
+  { code: "BN", flag: "🇧🇳", name: "브루나이",        region: "asia"     },
+  { code: "IN", flag: "🇮🇳", name: "인도",            region: "asia"     },
+  { code: "MO", flag: "🇲🇴", name: "마카오",          region: "asia"     },
+  { code: "PH", flag: "🇵🇭", name: "필리핀",          region: "asia"     },
+  // 오세아니아
+  { code: "AU", flag: "🇦🇺", name: "호주",            region: "asia"     },
+  { code: "NZ", flag: "🇳🇿", name: "뉴질랜드",        region: "asia"     },
+  // 북아메리카
+  { code: "CA", flag: "🇨🇦", name: "캐나다",          region: "americas" },
+  { code: "US", flag: "🇺🇸", name: "미국",            region: "americas" },
+  // 남아메리카
+  { code: "BR", flag: "🇧🇷", name: "브라질",          region: "americas" },
+  { code: "MX", flag: "🇲🇽", name: "멕시코",          region: "americas" },
+  // 유럽
+  { code: "AT", flag: "🇦🇹", name: "오스트리아",      region: "europe"   },
+  { code: "BE", flag: "🇧🇪", name: "벨기에",          region: "europe"   },
+  { code: "CZ", flag: "🇨🇿", name: "체코",            region: "europe"   },
+  { code: "DK", flag: "🇩🇰", name: "덴마크",          region: "europe"   },
+  { code: "FI", flag: "🇫🇮", name: "핀란드",          region: "europe"   },
+  { code: "FR", flag: "🇫🇷", name: "프랑스",          region: "europe"   },
+  { code: "DE", flag: "🇩🇪", name: "독일",            region: "europe"   },
+  { code: "HU", flag: "🇭🇺", name: "헝가리",          region: "europe"   },
+  { code: "IE", flag: "🇮🇪", name: "아일랜드",        region: "europe"   },
+  { code: "IT", flag: "🇮🇹", name: "이탈리아",        region: "europe"   },
+  { code: "NL", flag: "🇳🇱", name: "네덜란드",        region: "europe"   },
+  { code: "NO", flag: "🇳🇴", name: "노르웨이",        region: "europe"   },
+  { code: "PL", flag: "🇵🇱", name: "폴란드",          region: "europe"   },
+  { code: "PT", flag: "🇵🇹", name: "포르투갈",        region: "europe"   },
+  { code: "ES", flag: "🇪🇸", name: "스페인",          region: "europe"   },
+  { code: "SE", flag: "🇸🇪", name: "스웨덴",          region: "europe"   },
+  { code: "CH", flag: "🇨🇭", name: "스위스",          region: "europe"   },
+  { code: "GB", flag: "🇬🇧", name: "영국",            region: "europe"   },
+  // 중동
+  { code: "IL", flag: "🇮🇱", name: "이스라엘",        region: "mideast"  },
+  { code: "SA", flag: "🇸🇦", name: "사우디아라비아",  region: "mideast"  },
+  { code: "TR", flag: "🇹🇷", name: "튀르키예",        region: "mideast"  },
+  { code: "AE", flag: "🇦🇪", name: "아랍에미리트",    region: "mideast"  },
+  // 아프리카
+  { code: "EG", flag: "🇪🇬", name: "이집트",          region: "mideast"  },
+  { code: "NG", flag: "🇳🇬", name: "나이지리아",      region: "mideast"  },
+  { code: "ZA", flag: "🇿🇦", name: "남아프리카공화국",region: "mideast"  },
+];
+
+// ============================================================
+// DATA: Category Rules
+// ============================================================
+const CATEGORY_RULES = {
+  "공예_생활용품": { status: "possible", note: "" },
+  "공예_주방용품": { status: "partial", note: "칼 판매 불가" },
+  "공예_홈리빙": { status: "possible", note: "" },
+  "농축수산물_농산물": { status: "impossible", note: "농산물 해외 배송 불가" },
+  "농축수산물_수산물": { status: "impossible", note: "수산물 해외 배송 불가" },
+  "농축수산물_축산물": { status: "impossible", note: "축산물 해외 배송 불가" },
+  "디지털콘텐츠_굿노트": { status: "impossible", note: "디지털 콘텐츠는 현재 글로벌 판매 불가" },
+  "디지털콘텐츠_디지털리소스": { status: "impossible", note: "디지털 콘텐츠는 현재 글로벌 판매 불가" },
+  "디지털콘텐츠_영상": { status: "impossible", note: "디지털 콘텐츠는 현재 글로벌 판매 불가" },
+  "디지털콘텐츠_음원": { status: "impossible", note: "디지털 콘텐츠는 현재 글로벌 판매 불가" },
+  "디지털_거치대홀더": { status: "possible", note: "" },
+  "디지털_폰케이스": { status: "possible", note: "" },
+  "디지털_태블릿케이스": { status: "possible", note: "" },
+  "디지털_보조배터리": { status: "partial", note: "리튬이온 배터리 포함 작품 → MSDS 제출 필수" },
+  "디지털_워치스트랩": { status: "possible", note: "" },
+  "문구_다이어리": { status: "possible", note: "" },
+  "문구_스티커": { status: "possible", note: "" },
+  "문구_카드편지지": { status: "possible", note: "" },
+  "문구_노트": { status: "possible", note: "" },
+  "문구_기타": { status: "possible", note: "" },
+  "반려동물_의류": { status: "possible", note: "" },
+  "반려동물_액세서리": { status: "possible", note: "" },
+  "반려동물_가구": { status: "impossible", note: "반려동물가구 판매 불가" },
+  "반려동물_사료간식": { status: "impossible", note: "반려동물 식품(사료/간식) 판매 불가" },
+  "뷰티_스킨케어": { status: "possible", note: "" },
+  "뷰티_메이크업": { status: "possible", note: "" },
+  "뷰티_향수": { status: "impossible", note: "향수는 인화성 물질로 항공 배송 불가" },
+  "뷰티_헤어케어": { status: "partial", note: "염모제 판매 불가" },
+  "뷰티_비누클렌징": { status: "possible", note: "" },
+  "생활용품_건강케어": { status: "possible", note: "" },
+  "생활용품_캔들디퓨저": { status: "partial", note: "디퓨저 판매 불가 / 캔들은 MSDS 사전 제출 및 선적 가능 여부 확인 후 판매 가능" },
+  "생활용품_세제": { status: "partial", note: "손세정제 판매 불가" },
+  "식품_가공식품": { status: "impossible", note: "식품류 글로벌 판매 불가 (추후 오픈 예정)" },
+  "식품_과자베이커리": { status: "impossible", note: "식품류 글로벌 판매 불가" },
+  "식품_전통주": { status: "impossible", note: "식품류(전통주 포함) 글로벌 판매 불가" },
+  "액세서리_귀걸이": { status: "partial", note: "14K/18K/24K 금 소재 작품 판매 불가" },
+  "액세서리_목걸이": { status: "partial", note: "14K/18K/24K 금 소재 작품 판매 불가" },
+  "액세서리_반지": { status: "partial", note: "14K/18K/24K 금 소재 작품 판매 불가" },
+  "액세서리_팔찌": { status: "partial", note: "14K/18K/24K 금 소재 작품 판매 불가" },
+  "의류_상의": { status: "possible", note: "" },
+  "의류_원피스": { status: "possible", note: "" },
+  "의류_생활한복": { status: "possible", note: "" },
+  "패션잡화_가방": { status: "possible", note: "" },
+  "패션잡화_시계": { status: "possible", note: "" },
+  "패션잡화_모자": { status: "possible", note: "" },
+  "패션잡화_키링": { status: "possible", note: "" },
+  "홈리빙_가구": { status: "partial", note: "드레스룸 가구, 소파/거실가구, 수납가구/소품, 의자, 주방가구, 책상/서재가구, 침실가구, 캠핑가구 불가능" },
+  "홈리빙_패브릭": { status: "partial", note: "침구류, 커튼/블라인드 불가능" },
+  "홈리빙_홈데코": { status: "possible", note: "" },
+  "홈리빙_꽃식물": { status: "partial", note: "꽃선물/꽃상자, 드라이플라워/프리저브드, 생화, 리스, 식물, 웨딩플라워 불가능" },
+  "주방_식기": { status: "possible", note: "" },
+  "주방_컵텀블러": { status: "possible", note: "" },
+  "주방_조리도구": { status: "partial", note: "칼/도검류 판매 불가능" },
+  "취미_DIY키트": { status: "possible", note: "" },
+  "취미_그림": { status: "possible", note: "" },
+  "취미_악기": { status: "possible", note: "" },
+  "영유아_의류": { status: "possible", note: "" },
+  "영유아_장난감": { status: "possible", note: "" },
+};
+
+// ============================================================
+// DATA: 45 Countries
+// ============================================================
+
+// ============================================================
+// STATE
+// ============================================================
+let currentLang = 'ko';
+let currentProductInfo = null;
+let countryAnalysis = [];
+let currentRegionFilter = 'all';
+
+
+
+// ============================================================
+// TOGGLE MANUAL
+// ============================================================
+
+
+
+
+
+// ============================================================
+// ANALYZE FROM URL
+// ============================================================
+async function analyzeFromUrl() {
+  const url = document.getElementById('urlInput').value.trim();
+  if (!url) { alert('URL을 입력해주세요.'); return; }
+  if (!url.includes('idus.com')) { alert('아이디어스 작품 URL을 입력해주세요.'); return; }
+
+  showLoading('URL에서 작품 정보를 가져오는 중...');
+
+  const prompt = 'idus.com 한국 핸드메이드 마켓 전문가입니다. 아래 URL의 작품을 웹에서 검색하여 작품 정보를 파악하고 글로벌 판매 가능 여부를 분석하세요.\n\nURL: ' + url + '\n\n'
+    + '판매 완전불가: 농산물/수산물/축산물, 디지털콘텐츠, 향수, 반려동물가구/사료, 식품류(가공식품/과자/베이커리/음료/전통주), 차량용방향제\n'
+    + '조건부가능: 리튬이온 배터리(MSDS필수), 캔들(MSDS필수), 14K/18K/24K 금 액세서리, 디퓨저, 염모제\n'
+    + '위 불가 목록 외 모든 작품은 possible\n\n'
+    + '{ 로 시작하고 } 로 끝나는 순수 JSON만 반환:\n'
+    + '{"productName":"작품명","category":"카테고리코드","categoryDisplay":"카테고리명","emoji":"이모지","priceRange":"가격대","description":"설명","material":"소재","status":"possible또는partial또는impossible","statusReason":"이유2문장","conditions":"조건또는빈문자열","countryRecommendations":[]}';
+
+  try {
+    const response = await fetch('/api/claude', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 2000,
+        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) throw new Error('서버 오류 ' + response.status);
+    const apiData = await response.json();
+    if (!apiData.content) throw new Error('응답 없음');
+
+    const fullText = apiData.content.filter(b => b.type === 'text').map(b => b.text).join('');
+    const data = safeParseJSON(fullText);
+    if (!data || !data.productName) throw new Error('파싱 실패');
+
+    renderResult(data, 'url');
+  } catch(e) {
+    hideLoading();
+    console.error('URL 분석 오류:', e);
+    document.getElementById('manualForm').classList.add('open');
+    document.getElementById('manualForm').scrollIntoView({ behavior: 'smooth' });
+    showToast('URL 자동 분석에 실패했어요. 아래에서 직접 입력해주세요 👇');
+  }
+}
+
+// ============================================================
+// URL에서 작품 정보 자동 불러오기
+// ============================================================
+async function fetchFromUrl() {
+  const url = document.getElementById('urlInput').value.trim();
+  if (!url) { alert('URL을 입력해주세요.'); return; }
+  if (!url.includes('idus.com')) { alert('아이디어스 작품 URL을 입력해주세요.'); return; }
+
+  const statusEl = document.getElementById('urlStatus');
+  statusEl.textContent = '⏳ 작품 정보를 가져오는 중...';
+  statusEl.style.color = 'var(--gray-mid)';
+  showLoading('작품 정보를 분석하는 중...');
+
+  try {
+    // 1단계: 서버에서 아이디어스 페이지 크롤링
+    const fetchRes = await fetch('/api/fetch-product', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url })
+    });
+    const fetchData = await fetchRes.json();
+
+    const productName = fetchData.productName || '아이디어스 작품';
+    const description = fetchData.description || '';
+    const price = fetchData.price || '';
+
+    // 폼에도 채워두기
+    document.getElementById('m_name').value = productName;
+    if (description) document.getElementById('m_desc').value = description;
+    if (price) document.getElementById('m_price').value = price;
+
+    statusEl.textContent = '✅ 작품 정보를 가져왔어요!';
+    statusEl.style.color = 'var(--success)';
+
+    // 2단계: Claude API로 카테고리 판단 + 판매 가능 여부 분석
+    const prompt = '아이디어스 글로벌 마켓플레이스 전문가입니다. 아래 작품 정보를 분석해주세요.\n\n'
+      + '작품명: ' + productName + '\n'
+      + (description ? '설명: ' + description + '\n' : '')
+      + '\n판매 가능 여부 판정 기준:\n'
+      + '- 기본값은 possible(판매가능). 아래 명확한 불가 품목이 아니면 전부 possible\n'
+      + '- impossible: 농산물/수산물/축산물, 디지털콘텐츠, 향수, 반려동물가구/사료, 식품(과자/베이커리/떡/음료/전통주/가공식품), 차량용방향제, 폭발물, 마약류, 칼/도검류\n'
+      + '- partial: 리튬이온 배터리(MSDS필수), 캔들(MSDS필수), 14K/18K/24K 금 액세서리, 디퓨저, 염모제, 손세정제\n\n'
+      + '아래 JSON만 반환 (마크다운 금지, { 로 시작 } 로 끝):\n'
+      + '{"productName":"작품명","category":"카테고리코드","categoryDisplay":"카테고리표시명","emoji":"이모지1개","priceRange":"' + (price||'미입력') + '","description":"설명1문장","material":"소재","status":"possible또는partial또는impossible","statusReason":"판정이유2문장","conditions":"조건또는빈문자열","countryRecommendations":[]}';
+
+    const response = await callClaude(prompt);
+    const data = safeParseJSON(response);
+    if (!data) throw new Error('분석 결과를 파싱할 수 없어요');
+
+    // 카테고리 폼에도 반영
+    if (data.category) {
+      const catSelect = document.getElementById('m_cat');
+      for (let i = 0; i < catSelect.options.length; i++) {
+        if (catSelect.options[i].value === data.category) {
+          catSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    renderResult(data, 'url');
+
+  } catch(e) {
+    hideLoading();
+    statusEl.textContent = '❌ ' + e.message;
+    statusEl.style.color = 'var(--danger)';
+    // 실패 시 직접 입력 폼 열기
+    document.getElementById('manualForm').classList.add('open');
+    console.error('fetchFromUrl 오류:', e);
+  }
+}
+
+// ============================================================
+// 직접 입력 토글
+// ============================================================
+function toggleManual() {
+  const f = document.getElementById('manualForm');
+  f.classList.toggle('open');
+}
+
+// ============================================================
+// ANALYZE FROM MANUAL
+// ============================================================
+async function analyzeFromManual() {
+  const name = document.getElementById('m_name').value.trim();
+  const cat = document.getElementById('m_cat').value;
+  const desc = document.getElementById('m_desc').value.trim();
+  const material = document.getElementById('m_material').value.trim();
+  const price = document.getElementById('m_price').value.trim();
+
+  if (!name || !cat) { alert('작품명과 카테고리는 필수 입력 항목입니다.'); return; }
+
+  const rule = CATEGORY_RULES[cat] || { status: 'possible', note: '' };
+  
+  const catLabel = document.getElementById('m_cat').options[document.getElementById('m_cat').selectedIndex].text;
+
+  showLoading('작품을 분석하는 중...');
+
+  try {
+    const statusLabel = rule.status === 'possible' ? '판매가능' : rule.status === 'partial' ? '조건부가능' : '판매불가';
+    const prompt = `아이디어스 글로벌 마켓플레이스 전문가로서 아래 작품을 분석하여 JSON만 반환하세요. 마크다운 없이 { 로 시작하고 } 로 끝나는 순수 JSON만 출력하세요.
+
+작품 정보:
+이름: ${name}
+카테고리: ${catLabel}
+설명: ${desc || '없음'}
+소재: ${material || '없음'}
+가격: ${price || '없음'}
+판매상태: ${statusLabel}
+${rule.note ? '특이사항: ' + rule.note : ''}
+
+아이디어스 글로벌은 45개국 판매 (JP=일본, GB=나머지 44개국).
+
+아래 JSON 형식으로만 응답:
+{"productName":"${name}","category":"${cat}","categoryDisplay":"${catLabel}","emoji":"적합한이모지1개","priceRange":"${price || '미입력'}","description":"작품설명2문장","material":"${material || '미입력'}","status":"${rule.status}","statusReason":"판매${statusLabel} 이유를 2문장으로","conditions":"${rule.note || ''}","countryRecommendations":[]}`;
+
+    const response = await callClaude(prompt);
+    const data = safeParseJSON(response);
+    if (!data) throw new Error('JSON 파싱 실패');
+    // Override status with our rule
+    data.status = rule.status;
+    renderResult(data, 'manual');
+  } catch(e) {
+    hideLoading();
+    showToast('분석 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    console.error(e);
+  }
+}
+
+// ============================================================
+// CALL CLAUDE API
+// ============================================================
+async function callClaude(prompt) {
+  // 🔒 API 키는 서버(/api/claude)에서 관리 — 브라우저에 노출되지 않음
+  const response = await fetch("/api/claude", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 1000,
+      messages: [{ role: "user", content: prompt }]
+    })
+  });
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error('API 오류 ' + response.status + ': ' + (err?.error || response.statusText));
+  }
+  const data = await response.json();
+  if (!data.content || !data.content[0]) throw new Error('No response');
+  return data.content[0].text;
+}
+
+// ============================================================
+// SAFE JSON PARSER
+// ============================================================
+function safeParseJSON(text) {
+  if (!text) return null;
+  try { return JSON.parse(text); } catch {}
+  try {
+    const stripped = text.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+    return JSON.parse(stripped);
+  } catch {}
+  try {
+    const match = text.match(/\{[\s\S]*\}/);
+    if (match) return JSON.parse(match[0]);
+  } catch {}
+  return null;
+}
+
+// ============================================================
+// TOAST MESSAGE
+// ============================================================
+function showToast(msg) {
+  let toast = document.getElementById('toastMsg');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toastMsg';
+    toast.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1A1A2E;color:white;padding:13px 22px;border-radius:12px;font-size:13px;font-weight:500;z-index:999;box-shadow:0 4px 24px rgba(0,0,0,0.2);max-width:340px;text-align:center;line-height:1.5;';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => { toast.style.display = 'none'; }, 4000);
+}
+
+// ============================================================
+// LOADING
+// ============================================================
+function showLoading(msg) {
+  document.getElementById('loadingMsg').textContent = msg || '분석 중...';
+  document.getElementById('loadingState').classList.add('show');
+  document.getElementById('result-section').classList.remove('show');
+}
+
+function hideLoading() {
+  document.getElementById('loadingState').classList.remove('show');
+}
+
+// ============================================================
+// RENDER RESULT
+// ============================================================
+function renderResult(data, source) {
+  hideLoading();
+  currentProductInfo = data;
+  window._lastProduct = data; // 디버그용
+
+  // Status badge
+  const banner = document.getElementById('verdictBanner');
+  const icon = document.getElementById('verdictIcon');
+  const title = document.getElementById('verdictTitle');
+  const desc = document.getElementById('verdictDesc');
+
+  banner.className = 'verdict-banner';
+  if (data.status === 'possible') {
+    banner.classList.add('possible');
+    icon.textContent = '✅';
+    title.textContent = currentLang === 'en' ? 'Global Sales: POSSIBLE' : currentLang === 'ja' ? 'グローバル販売：可能' : '🎉 글로벌 판매 가능!';
+  } else if (data.status === 'partial') {
+    banner.classList.add('partial');
+    icon.textContent = '⚠️';
+    title.textContent = currentLang === 'en' ? 'Partially Available' : currentLang === 'ja' ? '条件付き販売可能' : '⚠️ 조건부 판매 가능';
+  } else {
+    banner.classList.add('impossible');
+    icon.textContent = '🚫';
+    title.textContent = currentLang === 'en' ? 'Global Sales: Not Available' : currentLang === 'ja' ? 'グローバル販売：不可' : '🚫 글로벌 판매 불가';
+  }
+  desc.textContent = data.statusReason || '';
+
+  // Product info
+  document.getElementById('productThumb').textContent = data.emoji || '📦';
+  document.getElementById('productName').textContent = data.productName;
+  document.getElementById('productCategory').textContent = data.categoryDisplay;
+  const tagEl = document.getElementById('productTag');
+  tagEl.textContent = source === 'url' ? 'URL 분석' : '직접 입력';
+  // Reason (조건이 있을 때만 표시)
+  const reasonEl = document.getElementById('reasonContent');
+  if (reasonEl) {
+    if (data.conditions) {
+      reasonEl.style.display = 'block';
+      reasonEl.innerHTML = `<div class="reason-box"><ul><li><strong>주의 조건:</strong> ${data.conditions}</li></ul></div>`;
+    } else {
+      reasonEl.style.display = 'none';
+    }
+  }
+
+  // Notice box
+  const noticeWrap = document.getElementById('noticeBoxWrap');
+  if (data.status === 'partial' || data.conditions) {
+    noticeWrap.innerHTML = `
+      <div class="notice-box">
+        <span>ℹ️</span>
+        <span>조건부 판매 가능 항목입니다. 정확한 판단을 위해 아이디어스 고객센터(<a href="https://idus.channel.io" target="_blank" style="color:var(--primary);">idus.channel.io</a>)로 문의해주세요.</span>
+      </div>`;
+  } else {
+    noticeWrap.innerHTML = '';
+  }
+
+  // Country Analysis
+  if (data.status === 'impossible') {
+    const impossibleReason = data.conditions || data.statusReason || '판매 불가 품목입니다.';
+    countryAnalysis = COUNTRIES.map(c => ({
+      countryCode: c.code,
+      tier: 'impossible',
+      reason: impossibleReason,
+      analyzed: true
+    }));
+  } else {
+    // 45개국 전부 미분석 상태로 초기화 (클릭 시 분석)
+    countryAnalysis = [];
+  }
+  renderCountriesGrid(countryAnalysis);
+
+
+
+  document.getElementById('result-section').style.display = 'block';
+  document.getElementById('tab-countries-content').style.display = 'block';
+  document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ============================================================
+// RENDER COUNTRIES GRID
+// ============================================================
+function renderCountriesGrid(recs) {
+  const grid = document.getElementById('countriesGrid');
+  if (!grid) return;
+  const isImpossible = currentProductInfo?.status === 'impossible';
+
+  const recMap = {};
+  (recs || []).forEach(r => { recMap[r.countryCode] = r; });
+
+  let displayCountries = COUNTRIES.filter(c =>
+    currentRegionFilter === 'all' ? true : c.region === currentRegionFilter
+  );
+
+  grid.innerHTML = displayCountries.map(c => {
+    const channel = c.code === 'JP' ? 'JP 채널' : 'GB 채널';
+
+    if (isImpossible) {
+      return `<div class="country-card impossible-card">
+        <div class="cc-header">
+          <span class="cc-flag">${c.flag}</span>
+          <span style="font-size:12px;font-weight:700;color:var(--danger);">🚫 판매 불가</span>
+        </div>
+        <div class="cc-name">${c.name}</div>
+      </div>`;
+    }
+
+    const rec = recMap[c.code];
+    if (rec && rec.analyzed) {
+      const safeReason = (rec.reason || '').replace(/'/g, "\'").replace(/`/g, "'");
+      return `<div class="country-card analyzed-card" onclick="openCountryDetail('${c.code}','${c.flag}','${c.name}','possible','${safeReason}','${channel}')">
+        <div class="cc-header">
+          <span class="cc-flag">${c.flag}</span>
+          <span class="cc-ok-badge">✅ 판매 가능</span>
+        </div>
+        <div class="cc-name">${c.name}</div>
+        <div class="c-reason">${rec.reason}</div>
+      </div>`;
+    }
+
+    return `<div class="country-card analyze-card" onclick="analyzeCountry('${c.code}','${c.flag}','${c.name}','${channel}',this)">
+      <div class="cc-header">
+        <span class="cc-flag">${c.flag}</span>
+        <span class="cc-ok-badge">✅ 판매 가능</span>
+      </div>
+      <div class="cc-name">${c.name}</div>
+      <span class="c-badge unanalyzed">분석하기 →</span>
+      <div class="c-reason">클릭하면 이 나라와의 궁합을 분석해드려요 🔍</div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// REGION FILTER
+// ============================================================
+function filterRegion(region, el) {
+  currentRegionFilter = region;
+  document.querySelectorAll('.region-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderCountriesGrid(countryAnalysis);
+}
+
+
+
+// ============================================================
+// MODAL
+// ============================================================
+function openCountryDetail(code, flag, name, tier, reason, channel) {
+  const tierLabel = '판매 가능';
+  const tierColor = 'var(--success)';
+  document.getElementById('modalContent').innerHTML = `
+    <h2 style="font-size:20px;margin-bottom:4px;">${flag} ${name}</h2>
+    <p style="font-size:12px;color:var(--gray-mid);margin-bottom:16px;">채널: <strong>${channel}</strong></p>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+      <span style="background:${tierColor};color:white;font-size:12px;font-weight:700;padding:4px 12px;border-radius:100px;">${tierLabel}</span>
+    </div>
+    <div style="background:var(--gray-pale);border-radius:12px;padding:16px;font-size:14px;line-height:1.7;color:var(--gray-dark);">
+      ${reason}
+    </div>
+    ${currentProductInfo ? `
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+      <p style="font-size:12px;color:var(--gray-mid);">분석 작품</p>
+      <p style="font-size:14px;font-weight:600;">${currentProductInfo.emoji} ${currentProductInfo.productName}</p>
+    </div>` : ''}
+    <a href="https://artist.idus.com/setting/global-artist/manage" target="_blank"
+       style="display:block;margin-top:16px;background:var(--primary);color:white;text-align:center;padding:12px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;">
+      글로벌 작가 등록하러 가기 →
+    </a>
+  `;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+// ============================================================
+// 국가 클릭 시 AI 분석 (미분석 국가)
+// ============================================================
+async function analyzeCountry(code, flag, name, channel, cardEl) {
+  if (!currentProductInfo) return;
+
+  // 로딩 상태
+  cardEl.innerHTML = `
+    <div class="cc-header">
+      <span class="cc-flag" style="opacity:.5;">${flag}</span>
+    </div>
+    <div class="cc-name">${name}</div>
+    <div class="c-reason" style="color:var(--gray-mid);">분석 중... ⏳</div>`;
+  cardEl.style.pointerEvents = 'none';
+
+  const p = currentProductInfo;
+
+  // 작품 정보 조합
+  const parts = [];
+  if (p.productName && p.productName !== '알 수 없는 상품' && p.productName !== '찾을 수 없는 아이디어스 상품') parts.push('작품명: ' + p.productName);
+  if (p.categoryDisplay && p.categoryDisplay !== '미확인' && p.categoryDisplay !== '미확인 카테고리') parts.push('카테고리: ' + p.categoryDisplay);
+  if (p.material && p.material !== '미입력') parts.push('소재: ' + p.material);
+  if (p.description && p.description.length > 5) parts.push('설명: ' + p.description);
+  const productDesc = parts.length > 0 ? parts.join('\n') : ('카테고리: ' + (p.categoryDisplay || '핸드메이드 작품'));
+
+  const prompt = '한국 핸드메이드 작품의 ' + name + ' 시장 궁합을 분석해주세요.\n\n'
+    + productDesc + '\n\n'
+    + '다음 두 가지를 2~3문장으로 작성하세요:\n'
+    + '1) ' + name + ' 소비자들이 이 카테고리/작품에 대해 갖는 문화적 시선과 선호도\n'
+    + '2) 이 작품의 ' + name + ' 시장 판매 가능성과 그 이유\n\n'
+    + '조건: 한국어로만, 구체적 나라 문화 특성 반드시 언급, "정보 부족/제한적" 절대 금지, 분석 내용만 출력';
+
+  try {
+    const analysisText = (await callClaude(prompt)).trim();
+
+    const existing = countryAnalysis.find(r => r.countryCode === code);
+    if (existing) {
+      existing.reason = analysisText;
+      existing.analyzed = true;
+    } else {
+      countryAnalysis.push({ countryCode: code, tier: 'possible', reason: analysisText, analyzed: true });
+    }
+
+    const safeReason = analysisText.replace(/'/g, "\\'").replace(/`/g, "'");
+    cardEl.innerHTML = `
+      <div class="cc-header">
+        <span class="cc-flag">${flag}</span>
+        <span class="cc-ok-badge">✅ 판매 가능</span>
+      </div>
+      <div class="cc-name">${name}</div>
+      <div class="c-reason">${analysisText}</div>`;
+    cardEl.classList.remove('analyze-card');
+    cardEl.classList.add('analyzed-card');
+    cardEl.style.pointerEvents = 'auto';
+    cardEl.onclick = () => openCountryDetail(code, flag, name, 'possible', safeReason, channel);
+
+  } catch(e) {
+    cardEl.innerHTML = `
+      <div class="cc-header">
+        <span class="cc-flag">${flag}</span>
+      </div>
+      <div class="cc-name">${name}</div>
+      <div class="c-reason" style="color:var(--danger);">분석 실패. 다시 클릭해주세요.</div>`;
+    cardEl.style.pointerEvents = 'auto';
+    cardEl.onclick = () => analyzeCountry(code, flag, name, channel, cardEl);
+    console.error('analyzeCountry 오류:', e);
+  }
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('show');
+}
+</script>
+</body>
+</html>
