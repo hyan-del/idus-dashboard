@@ -738,6 +738,25 @@
   .cc-reason-imp { color: var(--danger) !important; }
   .country-card .flag { display: block; }
 
+
+  /* Twemoji 이미지 크기 */
+  img.emoji {
+    height: 1.2em;
+    width: 1.2em;
+    vertical-align: -0.2em;
+    display: inline-block;
+  }
+  .cc-flag img.emoji {
+    height: 28px;
+    width: 28px;
+    vertical-align: middle;
+  }
+  .region-chip img.emoji {
+    height: 14px;
+    width: 14px;
+    vertical-align: middle;
+  }
+
 </style>
 </head>
 <body>
@@ -1682,5 +1701,31 @@ function closeModalDirect() {
   document.getElementById('modalOverlay').classList.remove('show');
 }
 </script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js" crossorigin="anonymous" onload="initTwemoji()"></script>
+<script>
+function initTwemoji() {
+  twemoji.parse(document.body, {
+    folder: 'svg',
+    ext: '.svg',
+    base: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/'
+  });
+}
+
+// 국가 카드 동적 생성 후 이모지 적용
+const _origGrid = renderCountriesGrid;
+renderCountriesGrid = function(recs) {
+  _origGrid(recs);
+  setTimeout(function() {
+    if (typeof twemoji !== 'undefined') {
+      const grid = document.getElementById('countriesGrid');
+      if (grid) twemoji.parse(grid, { folder: 'svg', ext: '.svg', base: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/' });
+    }
+  }, 50);
+};
+</script>
+
 </body>
 </html>
