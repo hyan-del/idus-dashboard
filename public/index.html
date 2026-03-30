@@ -770,7 +770,6 @@
   }
 
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
 </head>
 <body>
 
@@ -1013,6 +1012,40 @@
 </div>
 
 <script>
+
+
+// ============================================================
+// 간단한 Markdown 렌더러 (외부 라이브러리 불필요)
+// ============================================================
+function renderMd(text) {
+  if (!text) return '';
+  // ** 굵은 글씨 처리
+  let result = '';
+  let i = 0;
+  while (i < text.length) {
+    if (text[i] === '*' && text[i+1] === '*') {
+      const end = text.indexOf('**', i+2);
+      if (end !== -1) {
+        result += '<strong>' + text.slice(i+2, end) + '</strong>';
+        i = end + 2;
+        continue;
+      }
+    }
+    if (text[i] === '\n' && text[i+1] === '\n') {
+      result += '<br><br>';
+      i += 2;
+      continue;
+    }
+    if (text[i] === '\n') {
+      result += '<br>';
+      i++;
+      continue;
+    }
+    result += text[i];
+    i++;
+  }
+  return result;
+}
 
 const COUNTRIES = [
   // 아시아
@@ -1570,7 +1603,7 @@ function openCountryDetail(code, flag, name, tier, reason, channel) {
       <span style="background:${tierColor};color:white;font-size:12px;font-weight:700;padding:4px 12px;border-radius:100px;">${tierLabel}</span>
     </div>
     <div style="background:var(--gray-pale);border-radius:12px;padding:16px;font-size:14px;line-height:1.7;color:var(--gray-dark);" class="md-content">
-      ${typeof marked !== 'undefined' ? marked.parse(reason) : reason}
+      ${renderMd(reason)}
     </div>
     ${currentProductInfo ? `
     <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
@@ -1681,7 +1714,7 @@ async function analyzeCountry(code, flag, name, channel, cardEl) {
     }
 
     const safeReason = analysisText.replace(/'/g, "\\'").replace(/`/g, "'");
-    const parsedText = typeof marked !== 'undefined' ? marked.parse(analysisText) : analysisText;
+    const parsedText = renderMd(analysisText);
     cardEl.innerHTML = `
       <div class="cc-header">
         <span class="cc-flag">${flag}</span>
