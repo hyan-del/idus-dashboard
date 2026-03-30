@@ -757,7 +757,20 @@
     vertical-align: middle;
   }
 
+
+  /* Markdown 렌더링 스타일 */
+  .md-content p { margin: 0 0 6px 0; line-height: 1.6; }
+  .md-content p:last-child { margin-bottom: 0; }
+  .md-content strong { font-weight: 700; color: var(--dark); }
+  .md-content ol, .md-content ul { padding-left: 18px; margin: 4px 0; }
+  .md-content ol li, .md-content ul li { margin-bottom: 4px; line-height: 1.6; }
+  .md-content h1, .md-content h2, .md-content h3 {
+    font-size: 13px; font-weight: 700; margin: 8px 0 4px;
+    color: var(--dark);
+  }
+
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
 </head>
 <body>
 
@@ -988,7 +1001,7 @@
 </main>
 
 <div class="dash-footer">
-  © 2024 idus Global · 최신 업데이트: 2024.11.15 · 문의: <a href="https://idus.channel.io" style="color:var(--primary);">idus.channel.io</a>
+  © 2026 idus Global · 최신 업데이트: 2026.03.30 · 문의: <a href="https://idus.channel.io" style="color:var(--primary);">idus.channel.io</a>
 </div>
 
 <!-- COUNTRY DETAIL MODAL -->
@@ -1556,8 +1569,8 @@ function openCountryDetail(code, flag, name, tier, reason, channel) {
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
       <span style="background:${tierColor};color:white;font-size:12px;font-weight:700;padding:4px 12px;border-radius:100px;">${tierLabel}</span>
     </div>
-    <div style="background:var(--gray-pale);border-radius:12px;padding:16px;font-size:14px;line-height:1.7;color:var(--gray-dark);">
-      ${reason}
+    <div style="background:var(--gray-pale);border-radius:12px;padding:16px;font-size:14px;line-height:1.7;color:var(--gray-dark);" class="md-content">
+      ${typeof marked !== 'undefined' ? marked.parse(reason) : reason}
     </div>
     ${currentProductInfo ? `
     <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
@@ -1668,13 +1681,14 @@ async function analyzeCountry(code, flag, name, channel, cardEl) {
     }
 
     const safeReason = analysisText.replace(/'/g, "\\'").replace(/`/g, "'");
+    const parsedText = typeof marked !== 'undefined' ? marked.parse(analysisText) : analysisText;
     cardEl.innerHTML = `
       <div class="cc-header">
         <span class="cc-flag">${flag}</span>
         <span class="cc-ok-badge">✅ 판매 가능</span>
       </div>
       <div class="cc-name">${name}</div>
-      <div class="c-reason">${analysisText}</div>`;
+      <div class="c-reason md-content">${parsedText}</div>`;
     cardEl.classList.remove('analyze-card');
     cardEl.classList.add('analyzed-card');
     cardEl.style.pointerEvents = 'auto';
