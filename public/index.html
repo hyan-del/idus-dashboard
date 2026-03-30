@@ -1129,7 +1129,7 @@ let currentRegionFilter = 'all';
 async function analyzeFromUrl() {
   const url = document.getElementById('urlInput').value.trim();
   if (!url) { alert('URL을 입력해주세요.'); return; }
-  if (!url.includes('idus.com')) { alert('아이디어스 작품 URL을 입력해주세요.'); return; }
+  if (!url.includes('idus.com') && !url.includes('idus.kr')) { alert('아이디어스 작품 URL을 입력해주세요.'); return; }
 
   showLoading('URL에서 작품 정보를 가져오는 중...');
 
@@ -1176,7 +1176,7 @@ async function analyzeFromUrl() {
 async function fetchFromUrl() {
   const url = document.getElementById('urlInput').value.trim();
   if (!url) { alert('URL을 입력해주세요.'); return; }
-  if (!url.includes('idus.com')) { alert('아이디어스 작품 URL을 입력해주세요.'); return; }
+  if (!url.includes('idus.com') && !url.includes('idus.kr')) { alert('아이디어스 작품 URL을 입력해주세요.'); return; }
 
   const statusEl = document.getElementById('urlStatus');
   statusEl.textContent = '⏳ 작품 정보를 가져오는 중...';
