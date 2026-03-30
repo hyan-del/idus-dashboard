@@ -1192,7 +1192,17 @@ async function fetchFromUrl() {
     });
     const fetchData = await fetchRes.json();
 
-    const productName = fetchData.productName || '아이디어스 작품';
+    const productName = fetchData.productName || '';
+    if (!productName) {
+      hideLoading();
+      // 아이디어스 페이지를 새탭으로 열어서 작가님이 직접 확인할 수 있게
+      statusEl.innerHTML = '⚠️ 작품 정보를 자동으로 가져오지 못했어요. '
+        + '<a href="' + url + '" target="_blank" style="color:var(--primary);font-weight:600;">작품 페이지 열기 →</a> 후 아래에 직접 입력해주세요.';
+      statusEl.style.color = 'var(--warning)';
+      document.getElementById('manualForm').classList.add('open');
+      document.getElementById('m_name').focus();
+      return;
+    }
     const description = fetchData.description || '';
     const price = fetchData.price || '';
 
