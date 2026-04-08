@@ -769,6 +769,51 @@
     color: var(--dark);
   }
 
+
+  .guide-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--primary-pale);
+    color: var(--primary);
+    border: 1.5px solid var(--primary);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .guide-btn:hover {
+    background: var(--primary);
+    color: white;
+  }
+  @media (max-width: 600px) {
+    .guide-btn { font-size: 11px; padding: 6px 10px; }
+  }
+
+
+  .guide-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--primary-pale);
+    color: var(--primary);
+    border: 1.5px solid var(--primary);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .guide-btn:hover {
+    background: var(--primary);
+    color: white;
+  }
+
 </style>
 </head>
 <body>
@@ -779,7 +824,9 @@
     <div class="logo-mark">idus</div>
     <span class="logo-text"><span>글로벌</span> 판매 적합성 검사</span>
   </div>
-  
+  <a href="https://artist-mate.idus.com/d50ff6b3-8301-4f1a-bfed-25ccab054007" target="_blank" class="guide-btn">
+    📋 글로벌 운영 가이드
+  </a>
 </header>
 
   
